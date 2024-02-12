@@ -1,0 +1,120 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", "Sans-Serif";
+}
+body {
+  background-color: hsl(0, 0%, 94%);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1rem 1em 5rem 1rem;
+    overflow: hidden;
+    .input-container {
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 2.5rem;
+      gap: 1rem;
+      .date-input {
+        display: flex;
+        flex-direction: column;
+        label {
+          color: hsl(0, 1%, 44%);
+          font-weight: 600;
+          letter-spacing: 0.12rem;
+          text-transform: uppercase;
+        }
+        input {
+          font-size: 32px;
+          border-radius: 10px;
+          border: 1px solid hsl(0, 0%, 86%);
+          width: 6.5rem;
+          padding: 0.1rem;
+          -webkit-appearance: textfield;
+          -moz-appearance: textfield;
+          appearance: textfield;
+        }
+        input:hover,
+        input:active,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          cursor: pointer;
+        }
+        input:required::after {
+          color: red;
+          content: "This field is required.";
+        }
+        #input-day:invalid::after {
+          content: "Must be a valid day";
+          color: red;
+        }
+        #input-month:invalid::after {
+          content: "Must be a valid month";
+          color: red;
+        }
+        #input-month:invalid::after {
+          content: "Must be a valid year";
+          color: red;
+        }
+      }
+    }
+    .img-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 1rem;
+      hr {
+        background-color: hsl(0, 0%, 86%);
+        opacity: 0.2;
+        width: 100%;
+        z-index: 0;
+      }
+      img {
+        position: absolute;
+        height: 2rem;
+        background-color: hsl(259, 100%, 65%);
+        border-radius: 100%;
+        padding: 1rem;
+        z-index: 1;
+      }
+      img:active,
+      img:hover {
+        cursor: pointer;
+      }
+    }
+    .output-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 800;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      template {
+        color: hsl(259, 100%, 65%);
+      }
+      template:invalid:required::after {
+        content: "- -";
+      }
+    }
+  }
+}
+
+.cta {
+  height: 4rem;
+  width: 4rem;
+  background-color: hsl(259, 100%, 65%);
+  background-image: url("./assets/images/icon-arrow.svg");
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: none;
+}
