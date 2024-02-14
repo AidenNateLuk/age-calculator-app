@@ -3,38 +3,60 @@
   margin: 0;
   font-family: "Poppins", "Sans-Serif";
 }
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: url("path/to/Poppins-Italic-400.woff2") format("woff2"),
+    /* Italian (400) */ url("path/to/Poppins-Italic-400.woff") format("woff"); /* Fallback */
+}
+
+/* Poppins Bold (weight 700) */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  src: url("path/to/Poppins-Bold-700.woff2") format("woff2"),
+    /* Bold (700) */ url("path/to/Poppins-Bold-700.woff") format("woff"); /* Fallback */
+}
+
+/* Poppins Extra Bold (weight 800) */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 800;
+  src: url("path/to/Poppins-ExtraBold-800.woff2") format("woff2"),
+    /* Italian (800) */ url("path/to/Poppins-ExtraBold-800.woff") format("woff"); /* Fallback */
+}
 body {
   background-color: hsl(0, 0%, 94%);
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   .card {
     background-color: white;
-    padding: 1.5rem;
-    border-radius: 1rem 1em 5rem 1rem;
-    overflow: hidden;
+    padding: 2rem;
+    border-radius: 1rem 1em 10rem 1rem;
+
     .input-container {
-      padding-top: 1.5rem;
+      padding-top: 2rem;
       display: flex;
-      flex-direction: row;
       padding-bottom: 2.5rem;
       gap: 1rem;
-      .date-input {
+      .block {
         display: flex;
         flex-direction: column;
         label {
           color: hsl(0, 1%, 44%);
           font-weight: 600;
-          letter-spacing: 0.12rem;
           text-transform: uppercase;
         }
         input {
-          font-size: 32px;
+          color: rgba(221, 221, 221, 0.708);
+          font-size: 2rem;
           border-radius: 10px;
           border: 1px solid hsl(0, 0%, 86%);
-          width: 6.5rem;
           padding: 0.1rem;
           -webkit-appearance: textfield;
           -moz-appearance: textfield;
@@ -46,21 +68,12 @@ body {
           -webkit-appearance: none;
           cursor: pointer;
         }
-        input:required::after {
-          color: red;
-          content: "This field is required.";
-        }
-        #input-day:invalid::after {
-          content: "Must be a valid day";
-          color: red;
-        }
-        #input-month:invalid::after {
-          content: "Must be a valid month";
-          color: red;
-        }
-        #input-month:invalid::after {
-          content: "Must be a valid year";
-          color: red;
+        .error {
+          color: hsl(0, 100%, 67%);
+          display: none;
+          font-weight: 400;
+          font-size: 0.5rem;
+          padding-left: 1rem;
         }
       }
     }
@@ -68,53 +81,96 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding-top: 1rem;
+
+      .cta {
+        padding: 2rem;
+        background-color: hsl(259, 100%, 65%);
+        background-image: url("./assets/images/icon-arrow.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        background-size: 50%;
+        border: none;
+        cursor: pointer;
+      }
+      .cta:hover {
+        background-color: hsl(259, 94%, 75%);
+      }
       hr {
         background-color: hsl(0, 0%, 86%);
         opacity: 0.2;
         width: 100%;
         z-index: 0;
       }
-      img {
-        position: absolute;
-        height: 2rem;
-        background-color: hsl(259, 100%, 65%);
-        border-radius: 100%;
-        padding: 1rem;
-        z-index: 1;
-      }
-      img:active,
-      img:hover {
-        cursor: pointer;
-      }
     }
     .output-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      font-weight: 800;
-      padding-top: 2.5rem;
-      padding-bottom: 2.5rem;
-      template {
-        color: hsl(259, 100%, 65%);
+      h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        height: fit-content;
+        font-style: italic;
       }
-      template:invalid:required::after {
-        content: "- -";
+
+      span {
+        color: hsl(259, 100%, 65%);
       }
     }
   }
 }
 
-.cta {
-  height: 4rem;
-  width: 4rem;
-  background-color: hsl(259, 100%, 65%);
-  background-image: url("./assets/images/icon-arrow.svg");
-  background-position: center;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-  border: none;
+@media (max-width: 768px) {
+  body {
+    .card {
+      width: 320px;
+      .input-container {
+        .block {
+          width: 100%;
+          input {
+            width: 80px;
+          }
+        }
+      }
+
+      .img-div {
+        .cta {
+          position: absolute;
+          right: 50%;
+          top: 36%;
+          transform: translate(50%, 50%);
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  body {
+    .card {
+      width: 600px;
+      .input-container {
+        width: 90%;
+        .block {
+          width: 100%;
+          input {
+            width: 125px;
+            padding: 1rem;
+          }
+          .error {
+            font-size: 0.75rem;
+          }
+        }
+      }
+      .img-div {
+        .cta {
+          padding: 3rem;
+        }
+      }
+      .output-container {
+        h1 {
+          font-size: 5rem;
+        }
+      }
+    }
+  }
 }

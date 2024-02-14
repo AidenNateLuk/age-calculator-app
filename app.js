@@ -1,29 +1,58 @@
-function calculateAgeDifference(event) {
-  event.preventDefault();
+function calculateOrNot() {
+  let validator = false; // Assign a value to validator
+  if (!validator) {
+    validate();
+  } else {
+    calculateAgeDifference();
+  }
+}
 
-  const inputDay = document.getElementById("input-day").value;
-  const inputMonth = document.getElementById("input-month").value;
-  const inputYear = document.getElementById("input-year").value;
+function validate() {
+  const inputDay = document.getElementById("day").value;
+  const inputMonth = document.getElementById("month").value;
+  const inputYear = document.getElementById("year").value;
+  const inputs = document.querySelectorAll("input");
+  const error = document.querySelectorAll(".error");
+  for (let input of inputs) {
+    input.style.borderColor = ""; // Reset border color for all inputs
+  }
+
+  if (!inputDay || !inputMonth || !inputYear) {
+    for (let input of inputs) {
+      input.style.borderColor = "hsl(0, 100%, 67%)";
+    }
+    for (let err of error) {
+      err.style.display = "block";
+    }
+  } else {
+    calculateAgeDifference();
+  }
+}
+
+function calculateAgeDifference() {
+  const inputDayValue = document.getElementById("day").value;
+  const inputMonthValue = document.getElementById("month").value;
+  const inputYearValue = document.getElementById("year").value;
 
   const { year, month, day } = getCurrentDate();
 
-  let ageYear = year - inputYear;
-  let ageMonth = month - inputMonth;
-  let ageDay = day - inputDay;
+  let ageYear = year - inputYearValue;
+  let ageMonth = month - inputMonthValue;
+  let ageDay = day - inputDayValue;
 
-  let dayOutputTemplate = document.getElementById("day-output-template");
-  let monthOutputTemplate = document.getElementById("month-output-template");
-  let yearOutputTemplate = document.getElementById("year-output-template");
+  let dayOutputTemplate = document.getElementById("DD");
+  let monthOutputTemplate = document.getElementById("MM");
+  let yearOutputTemplate = document.getElementById("YY");
 
-  yearOutputTemplate.innerHTML = `${ageYear} years`;
-  monthOutputTemplate.innerHTML = `${ageMonth} months`;
-  dayOutputTemplate.innerHTML = `${ageDay} days`;
+  yearOutputTemplate.textContent = ageYear;
+  monthOutputTemplate.textContent = ageMonth;
+  dayOutputTemplate.textContent = ageDay;
 }
 
 function getCurrentDate() {
   const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
+  const currentYear = currentDate.getFullYear() - 1;
+  const currentMonth = currentDate.getMonth() + 13;
   const currentDay = currentDate.getDate();
   return { year: currentYear, month: currentMonth, day: currentDay };
 }
